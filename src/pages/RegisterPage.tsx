@@ -11,6 +11,7 @@ import { authErrorMessage } from '@/features/auth/auth-errors';
 import { RegisterSchema, type RegisterValues } from '@/features/auth/schema';
 import { authClient } from '@/lib/auth-client';
 import { APP_NAME } from '@/lib/config';
+import { Spinner } from '@/components/ui/spinner';
 
 type FieldProps = ComponentProps<typeof Input> & {
 	id: string;
@@ -54,7 +55,7 @@ export function RegisterPage() {
 			setServerError(authErrorMessage(error));
 			return;
 		}
-		navigate('/', { replace: true });
+		navigate('/dashboard', { replace: true });
 	};
 
 	return (
@@ -73,7 +74,7 @@ export function RegisterPage() {
 				<Field
 					id="name"
 					label="Nom complet"
-					placeholder="Marie Laurent"
+					placeholder="Doe Marie Laurent "
 					autoComplete="name"
 					error={errors.name?.message}
 					{...register('name')}
@@ -111,9 +112,12 @@ export function RegisterPage() {
 					</p>
 				)}
 
-				<Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+				<Button type="submit" size="lg" className="w-full cursor-pointer" disabled={isSubmitting}>
 					{isSubmitting ? (
+                       <>
+                         <Spinner data-icon="inline-start"/>
 						'Création…'
+                       </>
 					) : (
 						<>
 							Créer mon compte

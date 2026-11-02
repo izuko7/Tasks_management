@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate, useLocation } from 'react-router';
 import {zodResolver} from '@hookform/resolvers/zod';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoginSchema, type LoginValues } from "@/features/auth/schema";
@@ -8,13 +8,16 @@ import { authClient } from "@/lib/auth-client";
 import { authErrorMessage } from "@/features/auth/auth-errors";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
+import { redirectTarget } from "@/features/auth/redirect";
 
 
 export function LoginPage() {
     const navigate = useNavigate();
     const [serverError, setServerError] = useState<string | null>(null);
-
+    const location = useLocation();
+    
     const {
         register, 
         handleSubmit,
@@ -28,7 +31,7 @@ export function LoginPage() {
             setServerError(authErrorMessage(error));
             return;
         }
-        navigate('/', {replace : true});
+        navigate(redirectTarget(location.state), {replace : true});
     };
 
     return(
@@ -68,8 +71,14 @@ export function LoginPage() {
                             </p>
                         )}
 
-                        <Button type="submit" className="w-full" disabled={isSubmitting}>
-                            {isSubmitting ? 'Connexion...' : 'Se connecter'}
+                        <Button type="submit" className="w-full cursor-pointer" disabled={isSubmitting}>
+                            {isSubmitting ? 
+                           <>
+                            <Spinner data-icon="inline-start" />
+	                            Connexion…
+                           </>
+                            : 
+                            'Se connecter'}
                         </Button>
                     </form>
 
