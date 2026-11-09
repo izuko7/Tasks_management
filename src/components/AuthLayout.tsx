@@ -1,6 +1,6 @@
-import { ArrowLeft, Check, ChartColumn } from 'lucide-react';
+import { ArrowLeft, ChartColumn, Check } from 'lucide-react';
 import { Link, Outlet } from 'react-router';
-import { Logo } from './Logo';
+import { Logo } from '@/components/Logo';
 
 export function AuthLayout() {
 	return (
