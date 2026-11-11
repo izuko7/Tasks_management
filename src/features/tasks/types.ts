@@ -14,3 +14,12 @@ export type Task = {
 	userId: string;
 	project: { id: string; name: string } | null;
 };
+
+export type UpdateTaskInput = {
+	title?: string;
+	description?: string;
+	status?: TaskStatus;
+	priority?: Priority;
+	dueDate?: string | null;
+	projectId?: string | null;
+};

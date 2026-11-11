@@ -5,6 +5,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { computeTaskStats } from '@/features/tasks/stats';
 import { useTasks } from '@/features/tasks/hooks';
 import { apiErrorMessage } from '@/lib/api-errors';
+import { PriorityTasks } from '@/components/dashboard/PriorityTasks';
 
 export function DashboardPage() {
 	const tasks = useTasks();
@@ -34,6 +35,7 @@ export function DashboardPage() {
 		<div className="space-y-6">
 			<WelcomeHero stats={stats} />
 			<StatCards stats={stats} />
+			<PriorityTasks tasks={tasks.data}/>
 		</div>
 	);
 }

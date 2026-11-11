@@ -8,28 +8,28 @@ export function StatCards({ stats }: { stats: TaskStats }) {
 			label: 'Total des tâches',
 			value: stats.total,
 			note: `+${stats.createdThisWeek} cette semaine`,
-			iconClass: 'bg-brand text-brand-foreground',
+			iconClass: 'bg-foreground text-background',
 		},
 		{
 			icon: Check,
 			label: 'Terminées',
 			value: stats.done,
 			note: `${stats.percent}% du total`,
-			iconClass: 'bg-secondary text-secondary-foreground',
+			iconClass: 'bg-foreground text-background',
 		},
 		{
 			icon: Clock,
 			label: 'En cours',
 			value: stats.inProgress,
 			note: `${stats.todo} à faire`,
-			iconClass: 'bg-deep text-deep-foreground',
+			iconClass: 'bg-foreground text-background',
 		},
 		{
 			icon: Flag,
 			label: 'En retard',
 			value: stats.overdue,
 			note: stats.overdue > 0 ? 'À traiter en priorité' : 'Rien en retard',
-			iconClass: 'bg-destructive/15 text-destructive',
+			iconClass: 'bg-foreground text-background',
 		},
 	];
 
